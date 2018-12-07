@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  events:
+    build:
+      context: ./
+    networks:
+      - web
+      - default
+    expose:
+      - "80"
+    restart: always
+    labels:
+       - "traefik.backend=federez_demo"
+       - "traefik.docker.network=web"
+       - "traefik.enable=true"
+       - "traefik.basic.frontend.rule=Host:federez-demo.huberisation.eu"
+       - "traefik.basic.port=80"
+       - "traefik.basic.protocol=http"
+
+networks:
+  web:
+    external: true
